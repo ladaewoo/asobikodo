@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ひらがなメモラマ | Hiragana Memory</title>
+  <style>
+    /* スタイルの定義 */
+    /* sutairu no teigi - style definition */
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 20px;
+      background: #f9f9f9;
+    }
+    .ボード {
+      /* ボードの配置 */
+      /* bōdo no haichi - board layout */
+      display: grid;
+      grid-template-columns: repeat(6, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .カード {
+      /* カードのスタイル */
+      /* kādo no sutairu - card style */
+      width: 100px;
+      height: 100px;
+      background: #4da6ff;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      color: white;
+    }
+    .みえた {
+      /* 表示されたカード */
+      /* hyōji sareta kādo - revealed card */
+      background: #fff;
+      color: black;
+    }
+    .マッチ {
+      /* 一致したカード */
+      /* icchi shita kādo - matched card */
+      background: #99ff99;
+      color: black;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>ひらがな・ローマ字 メモラマ</h1>
+  <div class="ボード" id="ボード"></div>
+
+  <script>
+    // カードデータの定義
+    // kādo dēta no teigi - definition of card data
+    const カードデータ = [
+        // hひらがな (hiragana) and ローマ字 (romaji) pairs
+      { ひらがな: 'あ', ローマ: 'a' },
+      { ひらがな: 'い', ローマ: 'i' },
+      { ひらがな: 'う', ローマ: 'u' },
+      { ひらがな: 'え', ローマ: 'e' },
+      { ひらがな: 'お', ローマ: 'o' },
+      { ひらがな: 'か', ローマ: 'ka' },
+      { ひらがな: 'き', ローマ: 'ki' },
+      { ひらがな: 'く', ローマ: 'ku' },
+      { ひらがな: 'け', ローマ: 'ke' },
+      { ひらがな: 'こ', ローマ: 'ko' }
+    ];
+
+    // カードを複製してシャッフル
+    // kādo o fukusei shite shaffuru - duplicate and shuffle cards
+    let シャッフルカード = [...カードデータ, ...カードデータ.map(p => ({ ひらがな: p.ローマ, ローマ: p.ひらがな }))];
+    シャッフルカード.sort(() => Math.random() - 0.5);
+
+    // 選択されたカードを保存
+    // sentaku sareta kādo o hozon - store selected cards
+    let せんたく = [];
+    let ボード = document.getElementById('ボード');
+
+    // カードを生成し、ボードに追加
+    // kādo o seisei shi, bōdo ni tsuika - generate cards and add to board
+    シャッフルカード.forEach((カード, インデックス) => {
+      let エレメント = document.createElement('div');
+      エレメント.className = 'カード';
+      エレメント.dataset.みえる = false;
+      エレメント.dataset.ひょうじ = カード.ひらがな;
+
+      // クリック時の動作
+      // kurikku ji no dōsa - behavior on click
+      エレメント.onclick = () => {
+        if (せんたく.length >= 2 || エレメント.classList.contains('みえた')) return;
+
+        エレメント.textContent = エレメント.dataset.ひょうじ;
+        エレメント.classList.add('みえた');
+        せんたく.push({ インデックス, エレメント, ひょうじ: エレメント.dataset.ひょうじ });
+
+        // 二枚選ばれたら一致チェック
+        // nimai erabaretara icchi chekku - check match if two selected
+        if (せんたく.length === 2) {
+          let [a, b] = せんたく;
+          let 正しい = (a.ひょうじ === シャッフルカード[b.インデックス].ローマ) ||
+                       (b.ひょうじ === シャッフルカード[a.インデックス].ローマ);
+
+          if (正しい) {
+            // 一致した場合、固定
+            // icchi shita baai, kotei - if matched, fix them
+            a.エレメント.classList.add('マッチ');
+            b.エレメント.classList.add('マッチ');
+          } else {
+            // 不一致ならリセット
+            // fuicchi nara risetto - if not match, reset
+            setTimeout(() => {
+              a.エレメント.textContent = '';
+              b.エレメント.textContent = '';
+              a.エレメント.classList.remove('みえた');
+              b.エレメント.classList.remove('みえた');
+            }, 800);
+          }
+          せんたく = [];
+        }
+      };
+
+      ボード.appendChild(エレメント);
+    });
+  </script>
+</body>
+</html>

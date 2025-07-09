@@ -1,0 +1,406 @@
+<style>
+  body {
+    font-family: 'Inter', sans-serif; /* Usando Inter como fuente */
+    margin: 20px;
+    background-color: white;
+    color:#222 !important
+  }
+  table {
+    width: 1500px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra para que la tabla destaque */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen a todo */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  th, td {
+    padding: 8px; /* Aumentado el padding para mejor legibilidad */
+    text-align: center;
+    border: 1px solid #ddd; /* Color de borde más suave */
+  }
+  th {
+    background-color: #e0e0e0; /* Color de fondo para los encabezados */
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Estilo específico para las filas de encabezado de sección dentro del tbody */
+  .section-header {
+    background-color: #d0e0f0 !important; /* Un color de fondo diferente para los encabezados de sección */
+    font-weight: bold;
+    color: #222;
+    padding: 10px;
+  }
+  .special-note {
+    background-color: #fffacd !important; /* Color para la nota especial */
+    text-align: left !important;
+    padding: 15px;
+    font-style: italic;
+  }
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+  }
+
+  /* Estilos para los Romaji con apariencia de botón */
+  .romaji-button {
+    cursor: pointer; /* Cambia el cursor a una mano para indicar que es clickeable */
+    background-color: #f0f0f0; /* Fondo gris claro por defecto */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Transición suave para efectos */
+    border-radius: 4px; /* Bordes ligeramente redondeados para el botón */
+    user-select: none; /* Evita la selección de texto al hacer doble clic */
+  }
+
+  .romaji-button:hover {
+    background-color: #e6e6e6; /* Color de fondo más oscuro al pasar el ratón */
+    transform: translateY(-1px); /* Ligero levantamiento al pasar el ratón */
+  }
+
+  .romaji-button:active {
+    background-color: #dcdcdc; /* Color de fondo más oscuro al hacer clic */
+    transform: translateY(0); /* Vuelve a la posición original al hacer clic */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Sombra interna para efecto de "presionado" */
+  }
+</style>
+
+<h2>Silabario Japonés: Hiragana y Katakana</h2>
+
+<!-- Estructura de encabezados de la tabla -->
+<!-- Esta tabla define los encabezados principales "Romaji", "Hiragana" y "Katakana" -->
+<!-- Se ajustan los colspans para que coincida con la estructura de 10 columnas de la tabla de distribución -->
+<table data-label="structure">
+  <thead>
+    <tr>
+      <!-- "Romaji" abarca las 10 columnas lógicas de la tabla de distribución -->
+      <th colspan="10">Romaji (ローマ字)</th>
+    </tr>
+    <tr>
+      <!-- "Hiragana" abarca las primeras 5 columnas y "Katakana" las siguientes 5 -->
+      <th colspan="5">Hiragana (ひらがな)</th>
+      <th colspan="5">Katakana (カタカナ)</th>
+    </tr>
+  </thead>
+</table>
+
+<!-- Tabla de distribución fonética -->
+<!-- Esta tabla contiene los datos del silabario -->
+<!-- Cada "línea" fonética (ej. vocales, K-line) ocupa dos filas: una para el Romaji y otra para los caracteres -->
+<table data-label="distribution">
+  <tbody>
+    <!-- Fila de Vocales (A, I, U, E, O) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('a')">a</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('i')">i</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('u')">u</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('e')">e</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('o')">o</td>
+    </tr>
+    <tr>
+      <td>あ</td><td>ア</td>
+      <td>い</td><td>イ</td>
+      <td>う</td><td>ウ</td>
+      <td>え</td><td>エ</td>
+      <td>お</td><td>オ</td>
+    </tr>
+    <!-- Fila de la K-line (KA, KI, KU, KE, KO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ka')">ka</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ki')">ki</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ku')">ku</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ke')">ke</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ko')">ko</td>
+    </tr>
+    <tr>
+      <td>か</td><td>カ</td>
+      <td>き</td><td>キ</td>
+      <td>く</td><td>ク</td>
+      <td>け</td><td>ケ</td>
+      <td>こ</td><td>コ</td>
+    </tr>
+    <!-- Fila de la S-line (SA, SHI, SU, SE, SO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('sa')">sa</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('shi')">shi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('su')">su</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('se')">se</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('so')">so</td>
+    </tr>
+    <tr>
+      <td>さ</td><td>サ</td>
+      <td>し</td><td>シ</td>
+      <td>す</td><td>ス</td>
+      <td>せ</td><td>セ</td>
+      <td>そ</td><td>ソ</td>
+    </tr>
+    <!-- Fila de la T-line (TA, CHI, TSU, TE, TO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ta')">ta</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('chi')">chi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('tsu')">tsu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('te')">te</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('to')">to</td>
+    </tr>
+    <tr>
+      <td>た</td><td>タ</td>
+      <td>ち</td><td>チ</td>
+      <td>つ</td><td>ツ</td>
+      <td>て</td><td>テ</td>
+      <td>と</td><td>ト</td>
+    </tr>
+    <!-- Fila de la N-line (NA, NI, NU, NE, NO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('na')">na</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ni')">ni</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('nu')">nu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ne')">ne</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('no')">no</td>
+    </tr>
+    <tr>
+      <td>な</td><td>ナ</td>
+      <td>に</td><td>ニ</td>
+      <td>ぬ</td><td>ヌ</td>
+      <td>ね</td><td>ネ</td>
+      <td>の</td><td>ノ</td>
+    </tr>
+    <!-- Fila de la H-line (HA, HI, FU, HE, HO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ha')">ha</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('hi')">hi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('fu')">fu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('he')">he</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ho')">ho</td>
+    </tr>
+    <tr>
+      <td>は</td><td>ハ</td>
+      <td>ひ</td><td>ヒ</td>
+      <td>ふ</td><td>フ</td>
+      <td>へ</td><td>ヘ</td>
+      <td>ほ</td><td>ホ</td>
+    </tr>
+    <!-- Fila de la M-line (MA, MI, MU, ME, MO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ma')">ma</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('mi')">mi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('mu')">mu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('me')">me</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('mo')">mo</td>
+    </tr>
+    <tr>
+      <td>ま</td><td>マ</td>
+      <td>み</td><td>ミ</td>
+      <td>む</td><td>ム</td>
+      <td>め</td><td>メ</td>
+      <td>も</td><td>モ</td>
+    </tr>
+    <!-- Fila de la Y-line (YA, YU, YO) - Ajuste de colspans para espacios vacíos -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ya')">ya</td>
+      <td colspan="2"></td>
+      <td colspan="2" class="romaji-button" onclick="speakText('yu')">yu</td>
+      <td colspan="2"></td>
+      <td colspan="2" class="romaji-button" onclick="speakText('yo')">yo</td>
+    </tr>
+    <tr>
+      <td>や</td><td>ヤ</td>
+      <td colspan="2"></td>
+      <td>ゆ</td><td>ユ</td>
+      <td colspan="2"></td>
+      <td>よ</td><td>ヨ</td>
+    </tr>
+    <!-- Fila de la R-line (RA, RI, RU, RE, RO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ra')">ra</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ri')">ri</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ru')">ru</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('re')">re</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ro')">ro</td>
+    </tr>
+    <tr>
+      <td>ら</td><td>ラ</td>
+      <td>り</td><td>リ</td>
+      <td>る</td><td>ル</td>
+      <td>れ</td><td>レ</td>
+      <td>ろ</td><td>ロ</td>
+    </tr>
+    <!-- Fila de la W-line (WA, WO) - Colspans correctos en tu código original -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('wa')">wa</td>
+      <td colspan="6"></td>
+      <td colspan="2" class="romaji-button" onclick="speakText('wo')">wo</td>
+    </tr>
+    <tr>
+      <td>わ</td><td>ワ</td>
+      <td colspan="6"></td>
+      <td>を</td><td>ヲ</td>
+    </tr>
+    <!-- Fila de la N final - Colspans correctos en tu código original -->
+    <tr>
+      <td colspan="10" class="romaji-button" onclick="speakText('n')">n</td>
+    </tr>
+    <tr>
+      <td colspan="5">ん</td><td colspan="5">ン</td>
+    </tr>
+
+    <!-- Sección para Dakuon (濁音 - Sonidos Sonoros) -->
+    <tr>
+      <td colspan="10" class="section-header">濁音 (Dakuon - Sonidos Sonoros)</td>
+    </tr>
+    <!-- G-line (GA, GI, GU, GE, GO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ga')">ga</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('gi')">gi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('gu')">gu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ge')">ge</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('go')">go</td>
+    </tr>
+    <tr>
+      <td>が</td><td>ガ</td>
+      <td>ぎ</td><td>ギ</td>
+      <td>ぐ</td><td>グ</td>
+      <td>げ</td><td>ゲ</td>
+      <td>ご</td><td>ゴ</td>
+    </tr>
+    <!-- Z-line (ZA, JI, ZU, ZE, ZO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('za')">za</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ji')">ji</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('zu')">zu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ze')">ze</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('zo')">zo</td>
+    </tr>
+    <tr>
+      <td>ざ</td><td>ザ</td>
+      <td>じ</td><td>ジ</td>
+      <td>ず</td><td>ズ</td>
+      <td>ぜ</td><td>ゼ</td>
+      <td>ぞ</td><td>ゾ</td>
+    </tr>
+    <!-- D-line (DA, JI, ZU, DE, DO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('da')">da</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('ji_di')">ji (ぢ)</td> <!-- 'ji' (ぢ) y 'ji' (じ) suenan igual -->
+      <td colspan="2" class="romaji-button" onclick="speakText('zu_dzu')">zu (づ)</td> <!-- 'zu' (づ) y 'zu' (ず) suenan igual -->
+      <td colspan="2" class="romaji-button" onclick="speakText('de')">de</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('do')">do</td>
+    </tr>
+    <tr>
+      <td>だ</td><td>ダ</td>
+      <td>ぢ</td><td>ヂ</td>
+      <td>づ</td><td>ヅ</td>
+      <td>で</td><td>デ</td>
+      <td>ど</td><td>ド</td>
+    </tr>
+    <!-- B-line (BA, BI, BU, BE, BO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('ba')">ba</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('bi')">bi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('bu')">bu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('be')">be</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('bo')">bo</td>
+    </tr>
+    <tr>
+      <td>ば</td><td>バ</td>
+      <td>び</td><td>ビ</td>
+      <td>ぶ</td><td>ブ</td>
+      <td>べ</td><td>ベ</td>
+      <td>ぼ</td><td>ボ</td>
+    </tr>
+
+    <!-- Sección para Handakuon (半濁音 - Sonidos Semisonoros) -->
+    <tr>
+      <td colspan="10" class="section-header">半濁音 (Handakuon - Sonidos Semisonoros)</td>
+    </tr>
+    <!-- P-line (PA, PI, PU, PE, PO) -->
+    <tr>
+      <td colspan="2" class="romaji-button" onclick="speakText('pa')">pa</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('pi')">pi</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('pu')">pu</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('pe')">pe</td>
+      <td colspan="2" class="romaji-button" onclick="speakText('po')">po</td>
+    </tr>
+    <tr>
+      <td>ぱ</td><td>パ</td>
+      <td>ぴ</td><td>ピ</td>
+      <td>ぷ</td><td>プ</td>
+      <td>ぺ</td><td>ペ</td>
+      <td>ぽ</td><td>ポ</td>
+    </tr>
+
+    <!-- Nota Especial de Pronunciación para は -->
+    <tr>
+      <td colspan="10" class="section-header">Nota Especial de Pronunciación</td>
+    </tr>
+    <tr>
+      <td colspan="10" class="special-note">
+        La sílaba **は (ha)** se pronuncia como **"wa"** cuando funciona como una partícula gramatical (indicando el tema de la oración).
+        <br>Ejemplo: わたし**は**がくせい です (Watashi **wa** gakusei desu - Yo soy estudiante).
+        <br>
+        De manera similar, la sílaba **へ (he)** se pronuncia como **"e"** cuando funciona como una partícula direccional (indicando dirección).
+        <br>Ejemplo: とうきょう**へ**いきます (Tōkyō **e** ikimasu - Voy a Tokio).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  // Mapa de Romaji a Hiragana para la pronunciación
+  const romajiToHiraganaMap = {
+    'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
+    'ka': 'か', 'ki': 'き', 'ku': 'く', 'ke': 'け', 'ko': 'こ',
+    'sa': 'さ', 'shi': 'し', 'su': 'す', 'se': 'せ', 'so': 'そ',
+    'ta': 'た', 'chi': 'ち', 'tsu': 'つ', 'te': 'て', 'to': 'と',
+    'na': 'な', 'ni': 'に', 'nu': 'ぬ', 'ne': 'ね', 'no': 'の',
+    'ha': 'は', 'hi': 'ひ', 'fu': 'ふ', 'he': 'へ', 'ho': 'ほ',
+    'ma': 'ま', 'mi': 'み', 'mu': 'む', 'me': 'め', 'mo': 'も',
+    'ya': 'や', 'yu': 'ゆ', 'yo': 'よ',
+    'ra': 'ら', 'ri': 'り', 'ru': 'る', 're': 'れ', 'ro': 'ろ',
+    'wa': 'わ', 'wo': 'を',
+    'n': 'ん',
+    // Dakuon
+    'ga': 'が', 'gi': 'ぎ', 'gu': 'ぐ', 'ge': 'げ', 'go': 'ご',
+    'za': 'ざ', 'ji': 'じ', // Pronunciación de じ y ぢ es la misma
+    'zu': 'ず', // Pronunciación de ず y づ es la misma
+    'ze': 'ぜ', 'zo': 'ぞ',
+    'da': 'だ',
+    'ji_di': 'ぢ', // Para el carácter ぢ, aunque suene como じ
+    'zu_dzu': 'づ', // Para el carácter づ, aunque suene como ず
+    'de': 'で', 'do': 'ど',
+    'ba': 'ば', 'bi': 'び', 'bu': 'ぶ', 'be': 'べ', 'bo': 'ぼ',
+    // Handakuon
+    'pa': 'ぱ', 'pi': 'ぴ', 'pu': 'ぷ', 'pe': 'ぺ', 'po': 'ぽ'
+  };
+
+  /**
+   * Speaks the Japanese character corresponding to the given Romaji using the Web Speech API.
+   *
+   * @param {string} romaji The Romaji string (e.g., 'a', 'ka', 'shi').
+   */
+  function speakText(romaji) {
+    // Verifica si el navegador soporta la API de síntesis de voz
+    if ('speechSynthesis' in window) {
+      // Obtiene el carácter Hiragana/Katakana correspondiente al Romaji
+      const japaneseChar = romajiToHiraganaMap[romaji];
+
+      if (japaneseChar) {
+        const utterance = new SpeechSynthesisUtterance(japaneseChar);
+
+        // Configura el idioma a japonés para una pronunciación precisa
+        utterance.lang = 'ja-JP';
+
+        // Cancela cualquier habla en curso para evitar superposiciones
+        window.speechSynthesis.cancel();
+        // Inicia la reproducción del texto
+        window.speechSynthesis.speak(utterance);
+      } else {
+        console.warn('No se encontró el carácter japonés para el Romaji:', romaji);
+      }
+    } else {
+      console.warn('Tu navegador no soporta la API de Síntesis de Voz.');
+      // Puedes mostrar un mensaje al usuario si la API no está disponible
+      // alert('Lo siento, tu navegador no soporta la función de voz.');
+    }
+  }
+</script>
